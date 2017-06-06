@@ -1,56 +1,46 @@
 const personForm = document.querySelector('#personForm')
 
 function renderColor(color) {
-    const div = document.createElement('div')
-    div.style.backgroundColor = color
-    div.style.width ='100px'
-    div.style.height = '50px'
+  const div = document.createElement('div')
+  div.style.backgroundColor = color
+  div.style.width = '100px'
+  div.style.height = '50px'
 
-    return div 
+  return div
 }
 
-function handleSubmit(ev){
-    console.log(ev)
-    ev.preventDefault()
-    const f = ev.target
-    const details = document.querySelector('#details')
-    const name = f.personName.value
-    const favoriteColor =f.favoriteColor.value
-    const age = f.age.value
+function renderListItem(label, value) {
+  const item = document.createElement('li')
+  item.innerHTML = `${label}: ${value}`
 
-    // const colorDiv =`
-    // <div style="background-color: ${favoriteColor}; width: 100px; height:50px;"></div>`
+  return item
+}
 
-    // const boldedName = document.createElement('strong')
-    // boldedName.textContent = name 
-    // details.appendChild(boldedName)
+function renderList(personData) {
+  const list = document.createElement('ul')
 
-    // console.log(f.personName.value + f.personSchool.value)
+  // ['name', 'favoriteColor', 'age']
+  Object.keys(personData).map(function(label) {
+    const item = renderListItem(label, personData[label])
+    list.appendChild(item)
+  })
 
-// details.innerHTML = `
-// <ul>
-//     <li>Name: ${name}</li>
-//     <li>Favorite Color: ${colorDiv}</li>
-//     <li>Age: ${age}</li>
-// </ul>
-// `
+  return list
+}
 
-const liName = document.createElement('li')
-const liFavoriteColor = document.createElement('li')
-const liAge = document.createElement('li')
-const ulList = document.createElement('ul')
+function handleSubmit(ev) {
+  ev.preventDefault()
+  const f = ev.target
+  const details = document.querySelector('#details')
 
-liName.textContent = name
-liFavoriteColor.innerHTML = `Favorite Color: ${renderColor(favoriteColor).outerHTML}`
-liAge.textContent = age
-
-ulList.appendChild(liName)
-ulList.appendChild(liFavoriteColor)
-ulList.appendChild(liAge)
-
-details.innerHTML="";
-details.appendChild(ulList)
-        }
+  const person = {
+    name: f.personName.value,
+    favoriteColor: renderColor(f.favoriteColor.value).outerHTML,
+    age: f.age.value,
+  }
+  
+  const list = renderList(person)
+  details.appendChild(list)
+}
 
 personForm.addEventListener('submit', handleSubmit)
-
