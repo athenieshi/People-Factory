@@ -9,6 +9,7 @@ function handleSubmit(ev){
     console.log(f.personName.value + f.personSchool.value)
     const paragraph = document.querySelector('#location')
     paragraph.textContent = f.personSchool.value + " rocks"
+    paragraph.style.color = "red"
         }
 
 personForm.addEventListener('submit', handleSubmit)
