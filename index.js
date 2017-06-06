@@ -41,7 +41,7 @@ const liAge = document.createElement('li')
 const ulList = document.createElement('ul')
 
 liName.textContent = name
-liFavoriteColor.innerHTML = `${renderColor(favoriteColor).outerHTML}`
+liFavoriteColor.innerHTML = `Favorite Color: ${renderColor(favoriteColor).outerHTML}`
 liAge.textContent = age
 
 ulList.appendChild(liName)
